@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegram-bot
+  labels:
+    app: telegram-bot
+spec:
+  strategy: 
+    type: Recreate
+  selector:
+    matchLabels:
+      app: telegram-bot
+  replicas: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: telegram-bot
+    spec:
+      containers:
+        - name: app
+          image: acastle/telegram-bot:0.1.3
+          envFrom:
+          - secretRef:
+              name: telegram-bot-tokens
