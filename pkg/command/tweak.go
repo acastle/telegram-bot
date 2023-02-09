@@ -49,7 +49,7 @@ func (Tweak) Exec(ctx Context, msg *thread.Message) error {
 
 		switch name {
 		case "Model":
-			settings, err = DoSet(settings, val, nil, setModel)
+			settings, err = DoSet(settings, val, stringConverter, setModel)
 		case "MaxTokens":
 			settings, err = DoSet(settings, val, strconv.Atoi, setMaxTokens)
 		case "Temperature":
@@ -78,6 +78,10 @@ func (Tweak) Exec(ctx Context, msg *thread.Message) error {
 
 type Params interface {
 	float32 | int | string
+}
+
+func stringConverter(s string) (string, error) {
+	return s, nil
 }
 
 func float32Converter(s string) (float32, error) {
