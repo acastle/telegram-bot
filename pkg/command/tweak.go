@@ -102,7 +102,7 @@ func DoSet[T Params](params thread.CompletionParameters, valStr string, conv con
 	return setter(params, val)
 }
 
-var ModelRegex = regexp.MustCompile("^(text-davinci-003)$")
+var ModelRegex = regexp.MustCompile("^(text-davinci-003|text-curie-001|text-babbage-001|text-ada-001)$")
 
 func setModel(params thread.CompletionParameters, val string) (thread.CompletionParameters, error) {
 	if !ModelRegex.Match([]byte(val)) {
